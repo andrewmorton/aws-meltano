@@ -6,8 +6,8 @@ meltano_created_db = "meltano"
 
 # VPC Options
 target_vpc_azs = [
-  "us-east-az1",
-  "us-east-az2"
+  "us-east-1b",
+  "us-east-1c"
 ]
 
 # EC2 Options
