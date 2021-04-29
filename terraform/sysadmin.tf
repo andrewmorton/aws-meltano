@@ -20,7 +20,7 @@ resource aws_instance "eks_sysadmin" {
   subnet_id = data.aws_subnet.vpc_public_subnet.id
   key_name = var.sysadmin_keypair_name
   security_groups = [
-    aws_security_group.sysadmin_security_group
+    aws_security_group.sysadmin_security_group.id
   ]
 
   tags = {

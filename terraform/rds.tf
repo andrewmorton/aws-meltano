@@ -30,7 +30,9 @@ resource aws_db_instance "meltano_rds" {
   password = random_password.meltano_rds_master_pass.result
   db_subnet_group_name = aws_db_subnet_group.rds_private_subnet_group.name
   multi_az = var.rds_multi_az
-  vpc_security_group_ids = aws_security_group.meltano_rds_sg.id
+  vpc_security_group_ids = [
+    aws_security_group.meltano_rds_sg.id
+  ]
   
   tags = {
     Name = "${var.prefix}-meltano-rds"
