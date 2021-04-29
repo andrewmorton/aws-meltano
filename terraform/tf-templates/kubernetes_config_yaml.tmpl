@@ -11,8 +11,10 @@ spec:
         value: "postgresql://${db_username}:${db_password}@${db_endpoint}:5432/${created_db_name}"
       - name: MELTANO_DATABASE_MAX_RETRIES
         value: "3"
+      command: ["/bin/sh"]
+      args: ["printenv && meltano init"]
       ports:
-        - name: web
-          containerPort: 80
+        - name: meltano-ui
+          containerPort: 5000
           protocol: TCP
 
