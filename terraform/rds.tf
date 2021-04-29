@@ -22,6 +22,7 @@ resource aws_db_subnet_group "rds_private_subnet_group" {
 
 resource aws_db_instance "meltano_rds" {
   name = var.meltano_created_db
+  identifier = "${var.prefix}-meltano-rds"
   allocated_storage = 100
   engine = "postgres"
   engine_version = "13.1"
@@ -35,7 +36,6 @@ resource aws_db_instance "meltano_rds" {
   ]
   
   tags = {
-    Name = "${var.prefix}-meltano-rds"
     Terraform = "true"
   }
 }
