@@ -66,7 +66,7 @@ resource aws_instance "eks_sysadmin" {
   mkdir /home/ec2-user/bin
   sudo yum install -y amazon-linux-extras
   sudo yum update
-  sudo yum install -y jq neovim postgresql 
+  sudo yum install -y jq postgresql 
   curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C .
   mv eksctl /home/ec2-user/bin
 
@@ -77,6 +77,7 @@ resource aws_instance "eks_sysadmin" {
   chmod 700  /home/ec2-user/bin -R
 
   runuser -l ec2-user -c 'aws eks update-kubeconfig --region ${var.region} --name ${var.eks_cluster_name}'
+  # TODO: add a runuser line here to pull the sql for postgres and the meltano config yaml from parameter store
 
   EOF
 }
