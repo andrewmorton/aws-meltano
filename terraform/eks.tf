@@ -28,4 +28,8 @@ module "eks_cluster" {
       asg_max_size = var.eks_ec2_cluster_fleet
     }
   ]
+
+  workers_group_defaults = {
+    root_volume_type = "gp2"
+  }
 }

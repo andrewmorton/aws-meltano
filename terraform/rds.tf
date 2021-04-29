@@ -21,7 +21,7 @@ resource aws_db_subnet_group "rds_private_subnet_group" {
 
 
 resource aws_db_instance "meltano_rds" {
-  name = "${var.prefix}-meltano-rds"
+  name = var.meltano_created_db
   allocated_storage = 100
   engine = "postgres"
   engine_version = "13.1"
