@@ -27,8 +27,8 @@ resource aws_db_instance "meltano_rds" {
   engine = "postgres"
   engine_version = "13.1"
   instance_class = var.rds_instance_size
-  username = "master"
-  password = random_password.meltano_rds_master_pass.result
+  username = var.meltano_user
+  password = random_password.meltano_user_pass.result
   db_subnet_group_name = aws_db_subnet_group.rds_private_subnet_group.name
   multi_az = var.rds_multi_az
   skip_final_snapshot = true
