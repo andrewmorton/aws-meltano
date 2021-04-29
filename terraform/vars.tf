@@ -11,6 +11,18 @@ variable "source_provider_assume_role_arn" {
   description = "Assume role arn for the source account user"
 }
 
+variable "region" {
+  type = string
+  description = "Region to apply terraform within"
+  default = "us-east-1"
+}
+
+variable "eks_cluster_name" {
+  type = string
+  description = "Name of the EKS cluster"
+  default = "meltano_cluster"
+}
+
 # RDS Vars
 variable "meltano_user" {
   type = string

@@ -17,7 +17,7 @@ provider "kubernetes" {
 module "eks_cluster" {
   source  = "terraform-aws-modules/eks/aws"
   version = "15.1.0"
-  cluster_name = "meltano_cluster"
+  cluster_name = var.eks_cluster_name
   cluster_version = "1.17"
   subnets = module.meltano_vpc.private_subnets
   vpc_id = module.meltano_vpc.vpc_id

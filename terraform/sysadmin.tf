@@ -65,13 +65,17 @@ resource aws_instance "eks_sysadmin" {
 
   sudo yum install -y amazon-linux-extras
   sudo yum update
-  sudo yum install -y jq postgresql 
+  sudo yum install -y jq yq postgresql 
   curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
   sudo mv /tmp/eksctl /usr/local/bin
 
   curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.17/2020-11-02/bin/linux/amd64/kubectl
   chmod 777 kubectl
   sudo mv kubectl /usr/local/bin
+
+  cd /home/ec2-user
+  aws eks update-kubeconfig --region ${var.region} --name ${var.eks_cluster_name}
+
 
   EOF
 }
