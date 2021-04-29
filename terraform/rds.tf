@@ -1,11 +1,11 @@
 resource random_password "meltano_rds_master_pass" {
   length = 62
-  special = true
+  special = false
 }
 
 resource random_password "meltano_user_pass" {
   length = 20
-  special = true
+  special = false
 }
 
 resource aws_db_subnet_group "rds_private_subnet_group" {
