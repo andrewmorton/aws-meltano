@@ -28,7 +28,7 @@ resource aws_instance "eks_sysadmin" {
     Terraform = true
   }
 
-  user_data_base64 = <<EOF
+  user_data = <<EOF
   #!/bin/bash
 
   sudo yum install -y amazon-linux-extras
