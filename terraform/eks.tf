@@ -25,7 +25,7 @@ module "eks_cluster" {
   worker_groups = [
     {
       instance_type = var.eks_asg_instance_size
-      asg_max_size = var.eks_ec2_cluster_size
+      asg_max_size = var.eks_ec2_cluster_fleet
     }
   ]
 }
