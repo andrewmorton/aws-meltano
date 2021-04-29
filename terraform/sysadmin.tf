@@ -27,4 +27,15 @@ resource aws_instance "eks_sysadmin" {
     Name = "${var.prefix}-sysadmin"
     Terraform = true
   }
+
+  user_data_base64 = <<EOF
+  #!/bin/bash
+
+  sudo yum install -y amazon-linux-extras
+  sudo yum update
+  sudo yum install -y jq postgresql 
+  curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+  sudo mv /tmp/eksctl /usr/local/bin
+
+  EOF
 }
