@@ -76,7 +76,7 @@ resource aws_instance "eks_sysadmin" {
   chown ec2-user -R /home/ec2-user/bin
   chmod 700  /home/ec2-user/bin -R
 
-  su ec2-user && aws eks update-kubeconfig --region ${var.region} --name ${var.eks_cluster_name}
+  runuser -l ec2-user -c 'aws eks update-kubeconfig --region ${var.region} --name ${var.eks_cluster_name}'
 
   EOF
 }
