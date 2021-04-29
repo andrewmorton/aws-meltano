@@ -22,6 +22,14 @@ module "eks_cluster" {
   subnets = module.meltano_vpc.private_subnets
   vpc_id = module.meltano_vpc.vpc_id
 
+  map_roles = [
+    {
+      rolearn = aws_iam_role.meltano_ec2_sysadmin_role.arn
+      username = "ec2-sysadmin"
+      groups = ["system:masters"]
+    }
+  ]
+
   worker_groups = [
     {
       instance_type = var.eks_asg_instance_size

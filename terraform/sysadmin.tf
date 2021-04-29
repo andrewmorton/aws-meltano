@@ -62,20 +62,21 @@ resource aws_instance "eks_sysadmin" {
 
   user_data = <<EOF
   #!/bin/bash
+  
+  mkdir /home/ec2-user/bin
+  yum install -y amazon-linux-extras
+  yum update
+  yum install -y jq yq postgresql 
+  curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C .
+  mv eksctl /home/ec2-user/bin
 
-  sudo yum install -y amazon-linux-extras
-  sudo yum update
-  sudo yum install -y jq yq postgresql 
-  curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
-  sudo mv /tmp/eksctl /usr/local/bin
-
-  curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.17/2020-11-02/bin/linux/amd64/kubectl
+  curl -LO https://dl.k8s.io/release/v1.17.0/bin/linux/amd64/kubectl
   chmod 777 kubectl
-  sudo mv kubectl /usr/local/bin
+  mv kubectl /home/ec2-user/bin/
+  chown ec2-user -R /home/ec2-user/bin
+  chmod 700  /home/ec2-user/bin -R
 
-  cd /home/ec2-user
-  aws eks update-kubeconfig --region ${var.region} --name ${var.eks_cluster_name}
-
+  su ec2-user && aws eks update-kubeconfig --region ${var.region} --name ${var.eks_cluster_name}
 
   EOF
 }
