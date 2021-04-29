@@ -13,12 +13,44 @@ data aws_ami "amazon_linux" {
   ]
 }
 
+resource aws_iam_role "meltano_ec2_sysadmin_role" {
+  name = "meltano_ec2_sysadmin_role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+
+}
+
+resource aws_iam_role_policy_attachment "attach_sysadmin_access" {
+  # TODO: Create a custom role for EC2 management of EKS
+  role = aws_iam_role.meltano_ec2_sysadmin_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+}
+
+resource aws_iam_instance_profile "sysadmin_ec2_profile" {
+  name = "eks_sysadmin_profile"
+  role = aws_iam_role.meltano_ec2_sysadmin_role.name
+}
+
+
 resource aws_instance "eks_sysadmin" {
   ami = data.aws_ami.amazon_linux.id
   instance_type = "t3.medium"
   associate_public_ip_address = true
   subnet_id = module.meltano_vpc.public_subnets[0]
   key_name = var.sysadmin_keypair_name
+  iam_instance_profile = aws_iam_instance_profile.sysadmin_ec2_profile.name
   security_groups = [
     aws_security_group.sysadmin_security_group.id
   ]
