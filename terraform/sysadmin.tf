@@ -17,7 +17,7 @@ resource aws_instance "eks_sysadmin" {
   ami = data.aws_ami.amazon_linux.id
   instance_type = "t3.medium"
   associate_public_ip_address = true
-  subnet_id = data.aws_subnet.vpc_public_subnet.id
+  subnet_id = module.meltano_vpc.public_subnets[0]
   key_name = var.sysadmin_keypair_name
   security_groups = [
     aws_security_group.sysadmin_security_group.id
