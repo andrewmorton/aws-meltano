@@ -1,7 +1,7 @@
 resource aws_security_group "sysadmin_security_group" {
   name = "${var.prefix}-sysadmin-sg"
   description = "Access to the EKS sysadmin machine"
-  vpc_id = data.aws_vpc.deployment_vpc.id
+  vpc_id = module.meltano_vpc.vpc_id
 
   ingress {
     description = "SSH from trusted sources"
@@ -23,7 +23,7 @@ resource aws_security_group "sysadmin_security_group" {
 
 resource aws_security_group "meltano_rds_sg" {
   name = "${var.prefix}-meltano-rds-sg"
-  vpc_id = data.aws_vpc.deployment_vpc.id
+  vpc_id = module.meltano_vpc.vpc_id
   
   ingress {
     description = "Postgresql traffic from eks cluster group and sysadmin"

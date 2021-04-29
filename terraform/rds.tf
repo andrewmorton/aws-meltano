@@ -11,7 +11,7 @@ resource random_password "meltano_user_pass" {
 resource aws_db_subnet_group "rds_private_subnet_group" {
   name = "${var.prefix}-db-subnet-group"
 
-  subnet_ids = var.deployment_vpc_private_subnets
+  subnet_ids = module.meltano_vpc.private_subnets
 
   tags = {
     Name = "${var.prefix}-db-subnet-group"

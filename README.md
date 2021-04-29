@@ -18,5 +18,8 @@
 - Meltano seems pretty cool, but they really don't have an easily accessible quick start guide. I had to sort through a bit of information to find what I needed
 - I use this repo to manage my terraform service users in my own account: github.com:andrewmorton/terraform-service-users.git and I needed to update minimum permissions a few times
 - ran into permissions Issues with S3 bucket for remote state. We use artifactory for this very reason.
+- Ran Terraform with TF_LOG turned to DEBUG
+- ListObjects failed. I believe this is because the service user I have set in AWS_PROFILE does not have s3 bucket permissions (the service users are only really allowed to assume role by default in case of credential compromise)
+- Added S3 full access to service users group permissions, this fixed the issue
 - In order to actually deploy an EKS cluster, I also need to have a VPC and subnets for it to live in. If The assumption is that this repo is going to be used in an empty account, I would need to create even more resources. To save time, I used my existing VPC as a data source instead
--
+- Tried to apply to my VPC, but my VPC doesn't go across multiple availability zones. Adding VPC module

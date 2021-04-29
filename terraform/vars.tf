@@ -40,20 +40,17 @@ variable "rds_multi_az" {
 
 # VPC Vars
 
-variable "deployment_vpc_id" {
+variable "vpc_cidr_base" {
   type = string
-  description = "VPC ID to deploy the EKS cluster within"
+  description = "CIDR to base the VPC off of"
+  default =  "10.0.0.0/24"
 }
 
-variable "deployment_vpc_private_subnets" {
+variable "target_vpc_azs" {
   type = list
-  description = "Deployment VPC Private Subnet IDs"
+  description = "List of AZs to use for VPC creation"
 }
 
-variable "deployment_vpc_public_subnet_id" {
-  type = string
-  description = "Deployment VPC Public Subnet ID for sysadmin machine"
-}
 
 # EC2 Vars
 

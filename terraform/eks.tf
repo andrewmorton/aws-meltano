@@ -19,8 +19,8 @@ module "eks_cluster" {
   version = "15.1.0"
   cluster_name = "meltano_cluster"
   cluster_version = "1.17"
-  subnets = var.deployment_vpc_private_subnets
-  vpc_id = var.deployment_vpc_id
+  subnets = module.meltano_vpc.private_subnets
+  vpc_id = module.meltano_vpc.vpc_id
 
   worker_groups = [
     {
