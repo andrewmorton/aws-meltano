@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: meltano-pod
+spec:
+  containers:
+  - name: meltano
+    image: meltano/meltano:latest
+    env:
+    - name: MELTANO_DATABASE_URI
+      value: postgresql://${db_username}:${db_password}@${db_endpoint}:5432/${created_db_name}
+    - name: MELTANO_DATABASE_MAX_RETRIES
+      value: 3 # This is suggested default
+  - containerPort: 80
