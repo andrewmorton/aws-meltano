@@ -3,6 +3,11 @@ resource random_password "meltano_rds_master_pass" {
   special = true
 }
 
+resource random_password "meltano_user_pass" {
+  length = 20
+  special = true
+}
+
 resource aws_db_subnet_group "rds_private_subnet_group" {
   name = "${var.prefix}-db-subnet-group"
 
