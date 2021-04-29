@@ -64,9 +64,9 @@ resource aws_instance "eks_sysadmin" {
   #!/bin/bash
   
   mkdir /home/ec2-user/bin
-  yum install -y amazon-linux-extras
-  yum update
-  yum install -y jq yq postgresql 
+  sudo yum install -y amazon-linux-extras
+  sudo yum update
+  sudo yum install -y jq neovim postgresql 
   curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C .
   mv eksctl /home/ec2-user/bin
 
