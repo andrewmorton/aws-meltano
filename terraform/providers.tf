@@ -9,6 +9,6 @@ terraform {
   backend "s3" {
     bucket = "mavencollective-net-tf"
     region = "us-east-1"
-    key = "mavencollective-iam-service"
+    key = "mavencollective-eks-meltano"
   }
 }
