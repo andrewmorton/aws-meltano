@@ -12,7 +12,7 @@ target_vpc_azs = [
 
 # EC2 Options
 eks_admin_trusted_cidr = [
-  "45.46.240.94/32",
+  "45.46.240.94/32"
 ]
 
 sysadmin_keypair_name = "mavencollective-master-keypair"
