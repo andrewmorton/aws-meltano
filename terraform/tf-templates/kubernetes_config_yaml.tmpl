@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: meltano-pod
+  name: meltano
 spec:
   containers:
     - name: meltano
@@ -12,7 +12,7 @@ spec:
       - name: MELTANO_DATABASE_MAX_RETRIES
         value: "3"
       command: ["/bin/sh"]
-      args: ["printenv && meltano init"]
+      args: ["-c", "printenv; meltano init demo-project"]
       ports:
         - name: meltano-ui
           containerPort: 5000
