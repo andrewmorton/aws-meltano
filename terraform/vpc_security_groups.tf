@@ -31,7 +31,7 @@ resource aws_security_group "meltano_rds_sg" {
     to_port = 5432
     protocol = "TCP"
     security_groups = [
-      module.eks_cluster.cluster_primary_security_group_id,
+      module.eks_cluster.worker_security_group_id,
       aws_security_group.sysadmin_security_group.id
     ]
   }

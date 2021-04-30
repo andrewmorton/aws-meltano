@@ -33,7 +33,7 @@ resource aws_iam_role "meltano_ec2_sysadmin_role" {
 }
 
 resource aws_iam_role_policy_attachment "attach_sysadmin_access" {
-  # TODO: Create a custom role for EC2 management of EKS
+  # TODO: Create a custom role for EC2 management of EKS without admin access
   role = aws_iam_role.meltano_ec2_sysadmin_role.name
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
