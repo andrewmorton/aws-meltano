@@ -15,13 +15,12 @@
 7. Run `terraform plan -var-file tfvars/<my var file>.tfvars` in order to plan infrastructure changes with terraform
 8. Run `terraform apply -var-file tfvars/<my var file>.tfvars` and enter 'yes' when prompted to apply infrastructure changes
 9. Once changes are applied, ssh to the public IP of the Sysadmin machine. This has the access needed to interact with EKS and the RDS that have been provisioned
-10. Sign in to AWS Console and add the IAM identity provider for the eks cluster OIDC [eks guide aws](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-console.html)
-11. eksctl and kubectl should already be installed, but you may need to update your config. 
-12. Move deployment yaml from your repo into the sysadmin machine and `kubectl apply -f <my_deployment_yaml>.yml`.
+10. eksctl and kubectl should already be installed, but you may need to update your config. 
+11. Move deployment yaml from your repo into the sysadmin machine and `kubectl apply -f <my_deployment_yaml>.yml`.
 - This should have been created by Terraform during apply
 - If terraform was run from a sysadmin machine already with access to EKS, you can apply the deployment yaml without moving it to the instance first
 - you can use SCP for this if you have the ssh keypair to access the sysadmin EC2 `scp -i ~/.ssh/<my-private-key> ec2-user@<public-ip-of-sysadmin>`
-13. Kubernetes should now be hosting an unconfigured instance of meltano, which can be configured by accessing the container directly
+12. Kubernetes should now be hosting an unconfigured instance of meltano, which can be configured by accessing the container directly
 
 # Issues
 - Meltano seems pretty cool, but they really don't have an easily accessible quick start guide. I had to sort through a bit of information to find what I needed
