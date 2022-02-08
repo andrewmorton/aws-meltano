@@ -1,14 +1,10 @@
 provider "aws" {
-  region = var.region
-  assume_role {
-    role_arn = var.source_provider_assume_role_arn
-  }
+ # Fill this in to interact with the target AWS account.
+ # Prefer using an assumed role to passing credentials directly
 }
 
-terraform {
-  backend "s3" {
-    bucket = "mavencollective-net-tf"
-    region = "us-east-1"
-    key = "mavencollective-eks-meltano"
-  }
+provider "kubernetes" {
+  # Fill this in to interact with the kubernetes cluster that has been provisioned
 }
+
+# Suggest using s3 backend for saving terraform state below
